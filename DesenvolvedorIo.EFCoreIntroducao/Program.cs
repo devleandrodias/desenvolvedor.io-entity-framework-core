@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using DesenvolvedorIo.EFCoreIntroducao.Data;
 using DesenvolvedorIo.EFCoreIntroducao.Domain;
 using DesenvolvedorIo.EFCoreIntroducao.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 
 namespace DesenvolvedorIo.EFCoreIntroducao
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -21,7 +23,40 @@ namespace DesenvolvedorIo.EFCoreIntroducao
 
             //InserirDados();
 
-            InserirDadosEmMassa();
+            //InserirDadosEmMassa();
+
+            //ConsultarDados();
+
+            //InserirDadosRelacionados();
+
+            ConsultarPedidosCarregamentoAdiantado();
+        }
+
+        private static void ConsultarDados()
+        {
+            ApplicationContext db = new ApplicationContext();
+
+            //List<Cliente> consultaPorSintaxa = (from c in db.Clientes where c.Id > 0 select c).ToList();
+
+            /**
+             * O Entity Framework Core por padrao ao realizar uma consulta faz o Tracking dos dados obtidos p/ memoria
+             * Quando for realizar uma consulta ele fara primeiro na memoria caso nao encontre, entao fara consulta
+             * diretamente na sua base de dados. (Find eh o unico que faz consulta na memoria)
+             * Utilizando o AsNoTracking ele nao trackeia os registros e toda consulta sera feita diretamente no 
+             * banco de dados ao inves da memoria.
+             */
+
+            List<Cliente> consultaPorMetodo = db.Clientes
+                .Where(x => x.Id > 0)
+                .OrderBy(x => x.Id)
+                .ToList();
+
+            foreach (var cliente in consultaPorMetodo)
+            {
+                Console.WriteLine($"Consultando cliente: {cliente.Id}");
+                //db.Clientes.Find(cliente.Id);
+                db.Clientes.FirstOrDefault(x => x.Id == cliente.Id);
+            }
         }
 
         private static void InserirDadosEmMassa()
@@ -98,6 +133,53 @@ namespace DesenvolvedorIo.EFCoreIntroducao
             int registros = db.SaveChanges();
 
             Console.WriteLine($"Total de registro(s): {registros}");
+        }
+
+        private static void InserirDadosRelacionados()
+        {
+            ApplicationContext db = new ApplicationContext();
+
+            Cliente cliente = db.Clientes.FirstOrDefault();
+            Produto produto = db.Produtos.FirstOrDefault();
+
+            Pedido pedido = new Pedido
+            {
+                ClienteId = cliente.Id,
+                IniciadoEm = DateTime.Now,
+                FinalizadoEm = DateTime.Now,
+                Observacao = "Pedido de Teste",
+                Status = StatusPedido.Finalizado,
+                TipoFrete = TipoFrete.FOB,
+                Itens = new List<PedidoItem>
+                {
+                    new PedidoItem
+                    {
+                        ProdutoId = produto.Id,
+                        Desconto = 0,
+                        Quanitdade =1,
+                        Valor = 10
+                    }
+                }
+            };
+
+            db.Set<Pedido>().Add(pedido);
+
+            db.SaveChanges();
+        }
+
+        private static void ConsultarPedidosCarregamentoAdiantado()
+        {
+            ApplicationContext db = new ApplicationContext();
+
+            // Carregamento Adiantado (Include)
+            //List<Pedido> pedidos = db.Pedidos.Include("Itens").ToList();
+
+            List<Pedido> pedidos = db.Pedidos
+                .Include(x => x.Itens)
+                .ThenInclude(y => y.Produto)
+                .ToList();
+
+            Console.WriteLine(pedidos);
         }
     }
 }
