@@ -12,5 +12,6 @@
   <ItemGroup>
     <Folder Include="Domain\" />
     <Folder Include="ValueObjects\" />
+    <Folder Include="Data\" />
   </ItemGroup>
 </Project>
