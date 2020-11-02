@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Na1BA6OFtiKW7GS831jbfWXh4gNebRWk7LvZX8i6s8Seh3ht3ohL/RZsR6MFcgzOVJI/8hCQasCJaU9SIyj2rA==",
+  "dgSpecHash": "t2jFE72pGm0moXIfXwEM8dojAIV+BL1+5owMKGcKFE6zlmCN63FgVgP2pJacSKSJ68rn8s+Ho7pbsOtdw7QNFw==",
   "success": true,
   "projectFilePath": "/Users/leandrodias/Desktop/desenvolvedor.io-entity-framework-core/DesenvolvedorIo.EFCoreIntroducao/DesenvolvedorIo.EFCoreIntroducao.csproj",
   "expectedPackageFiles": [
@@ -24,7 +24,10 @@
     "/Users/leandrodias/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/3.1.9/microsoft.extensions.dependencyinjection.abstractions.3.1.9.nupkg.sha512",
     "/Users/leandrodias/.nuget/packages/microsoft.extensions.logging/3.1.9/microsoft.extensions.logging.3.1.9.nupkg.sha512",
     "/Users/leandrodias/.nuget/packages/microsoft.extensions.logging.abstractions/3.1.9/microsoft.extensions.logging.abstractions.3.1.9.nupkg.sha512",
+    "/Users/leandrodias/.nuget/packages/microsoft.extensions.logging.configuration/3.1.9/microsoft.extensions.logging.configuration.3.1.9.nupkg.sha512",
+    "/Users/leandrodias/.nuget/packages/microsoft.extensions.logging.console/3.1.9/microsoft.extensions.logging.console.3.1.9.nupkg.sha512",
     "/Users/leandrodias/.nuget/packages/microsoft.extensions.options/3.1.9/microsoft.extensions.options.3.1.9.nupkg.sha512",
+    "/Users/leandrodias/.nuget/packages/microsoft.extensions.options.configurationextensions/3.1.9/microsoft.extensions.options.configurationextensions.3.1.9.nupkg.sha512",
     "/Users/leandrodias/.nuget/packages/microsoft.extensions.primitives/3.1.9/microsoft.extensions.primitives.3.1.9.nupkg.sha512",
     "/Users/leandrodias/.nuget/packages/microsoft.identity.client/3.0.8/microsoft.identity.client.3.0.8.nupkg.sha512",
     "/Users/leandrodias/.nuget/packages/microsoft.identitymodel.jsonwebtokens/5.5.0/microsoft.identitymodel.jsonwebtokens.5.5.0.nupkg.sha512",
