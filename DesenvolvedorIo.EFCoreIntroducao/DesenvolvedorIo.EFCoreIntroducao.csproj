@@ -13,5 +13,6 @@
     <Folder Include="Domain\" />
     <Folder Include="ValueObjects\" />
     <Folder Include="Data\" />
+    <Folder Include="Data\Configurations\" />
   </ItemGroup>
 </Project>
