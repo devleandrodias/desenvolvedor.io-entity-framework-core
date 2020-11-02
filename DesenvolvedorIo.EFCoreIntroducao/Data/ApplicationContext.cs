@@ -1,4 +1,5 @@
-﻿using DesenvolvedorIo.EFCoreIntroducao.Domain;
+﻿using System;
+using DesenvolvedorIo.EFCoreIntroducao.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -19,7 +20,12 @@ namespace DesenvolvedorIo.EFCoreIntroducao.Data
             optionsBuilder
                 .UseLoggerFactory(_logger)
                 .EnableSensitiveDataLogging()
-                .UseSqlServer("Server=127.0.0.1,1433;Database=dev_io_entity_framework_intro;User Id=sa;Password=m9F857JJXLhss2Mm;");
+                .UseSqlServer("Server=127.0.0.1,1433;Database=dev_io_entity_framework_intro;User Id=sa;Password=m9F857JJXLhss2Mm;",
+                    x => x.EnableRetryOnFailure(
+                            maxRetryCount: 2,
+                            maxRetryDelay: TimeSpan.FromSeconds(5),
+                            errorNumbersToAdd: null
+                        ).MigrationsHistoryTable("curso_ef_core_migrations"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
