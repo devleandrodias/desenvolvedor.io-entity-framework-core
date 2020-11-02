@@ -29,7 +29,9 @@ namespace DesenvolvedorIo.EFCoreIntroducao
 
             //InserirDadosRelacionados();
 
-            ConsultarPedidosCarregamentoAdiantado();
+            //ConsultarPedidosCarregamentoAdiantado();
+
+            AtualizarDados();
         }
 
         private static void ConsultarDados()
@@ -180,6 +182,28 @@ namespace DesenvolvedorIo.EFCoreIntroducao
                 .ToList();
 
             Console.WriteLine(pedidos);
+        }
+
+        private static void AtualizarDados()
+        {
+            ApplicationContext db = new ApplicationContext();
+
+            Cliente cliente = db.Clientes.FirstOrDefault(x => x.Id == 2);
+
+            cliente.Nome = "Leandro Dias Atalizado 2";
+
+            var clienteDesconctado = new
+            {
+                Nome = "Cliente Desconctado",
+                Telefone = "37593759357"
+            };
+
+            // Sobrescreve todas as informacoes para atualizar msm as que nao sofreram atualizacao
+            //db.Clientes.Update(cliente);
+
+            db.Entry(cliente).CurrentValues.SetValues(clienteDesconctado);
+
+            db.SaveChanges();
         }
     }
 }
