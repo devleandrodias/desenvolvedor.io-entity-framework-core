@@ -31,7 +31,9 @@ namespace DesenvolvedorIo.EFCoreIntroducao
 
             //ConsultarPedidosCarregamentoAdiantado();
 
-            AtualizarDados();
+            //AtualizarDados();
+
+            RemoverDados();
         }
 
         private static void ConsultarDados()
@@ -202,6 +204,23 @@ namespace DesenvolvedorIo.EFCoreIntroducao
             //db.Clientes.Update(cliente);
 
             db.Entry(cliente).CurrentValues.SetValues(clienteDesconctado);
+
+            db.SaveChanges();
+        }
+
+        private static void RemoverDados()
+        {
+            ApplicationContext db = new ApplicationContext();
+
+            Cliente clienteDesconectado = new Cliente { Id = 3};
+
+            //Cliente cliente = db.Clientes.Find(4);
+
+            db.Clientes.Remove(clienteDesconectado);
+
+            //db.Clientes.Remove(cliente);
+            //db.Remove(cliente);
+            //db.Entry(cliente).State = EntityState.Deleted;
 
             db.SaveChanges();
         }
