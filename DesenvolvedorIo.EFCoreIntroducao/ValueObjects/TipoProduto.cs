@@ -2,7 +2,7 @@
 {
     public enum TipoProduto
     {
-        MercadoraParaRevenda,
+        MercadoriaParaRevenda,
         Embalagem,
         Servico
     }

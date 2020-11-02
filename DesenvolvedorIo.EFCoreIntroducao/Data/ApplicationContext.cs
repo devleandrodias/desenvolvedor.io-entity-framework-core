@@ -1,5 +1,4 @@
-﻿using DesenvolvedorIo.EFCoreIntroducao.Data.Configurations;
-using DesenvolvedorIo.EFCoreIntroducao.Domain;
+﻿using DesenvolvedorIo.EFCoreIntroducao.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace DesenvolvedorIo.EFCoreIntroducao.Data
@@ -7,6 +6,10 @@ namespace DesenvolvedorIo.EFCoreIntroducao.Data
     public class ApplicationContext : DbContext
     {
         public DbSet<Pedido> Pedidos { get; set; }
+
+        public DbSet<Produto> Produtos { get; set; }
+
+        public DbSet<Cliente> Clientes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -17,6 +20,8 @@ namespace DesenvolvedorIo.EFCoreIntroducao.Data
         {
             // Faz o ef core procurar no assembly todas as classes que implementan interface IEntityTypeConfiguration e mapeia elas
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationContext).Assembly);
+
+            //modelBuilder.ApplyConfiguration(new ClienteConfiguration());
         }
     }
 }
